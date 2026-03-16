@@ -1,0 +1,9 @@
+.vscode
+*.exe
+*.o
+*.obj
+*.dll
+*.so
+*.dylib
+*.log
+*.out
