@@ -1,12 +1,19 @@
 #include <iostream>
 #include <array>
+#include <algorithm>
 
-void bubbleSort(std::array<int, 5>& arr) {
+template <size_t N>
+void bubbleSort(std::array<int, N>& arr) {
     for (size_t i = 0; i < arr.size() - 1; ++i) {
+        bool swapped = false;
         for (size_t j = 0; j < arr.size() - i - 1; ++j) {
             if (arr[j] > arr[j + 1]) {
                 std::swap(arr[j], arr[j + 1]);
+                swapped = true;
             }
+        }
+        if (!swapped) {
+            break;
         }
     }
 }
@@ -33,7 +40,8 @@ int main() {
 
     std::sort(modernNumbers.begin(), modernNumbers.end(), std::less<int>());
 
-    std::array<int, 7> moreNumbers = {23, 20, 30, 40, 5, 60, 7};
+    std::array<int, 7> moreNumbers = {23, 20, 30, 40, 5};
+    moreNumbers[5] = 15;
     bubbleSort(moreNumbers);
 
     int find = 333;
