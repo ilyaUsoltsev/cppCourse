@@ -1,3 +1,0 @@
-const tsFunction = () => {
-    console.log("heelo");
-}
