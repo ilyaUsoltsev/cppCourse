@@ -16,10 +16,14 @@ public:
 };
 
 int main() {
+    Point points[3]; // отработает конструктор по умолчанию для каждого элемента массива
     Point p(3, 3);
     Point* ptr = new Point(13, 23);
     p.print();
     ptr->print();
+    for (const auto& point : points) {
+        point.print();
+    }
     delete ptr;
     return 0;
 }
