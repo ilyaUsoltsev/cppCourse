@@ -8,6 +8,37 @@ class DArray {
     value_error = 2123456789
   };
 
+  class Item {
+    DArray *array{nullptr};
+    int index{-1};
+
+  public:
+    Item(DArray *arr, int idx) : array(arr), index(idx) {}
+    // case when we want to assign a value to the array element
+    // eg. arr[1] = 100;
+    int operator=(int value) {
+      if (index >= 0 && index < array->length) {
+        array->data[index] = value;
+      }
+      // extend size, fill with zeroes
+      else if (index >= array->length && index < array->capacity) {
+        for (int i = array->length; i < index; ++i) {
+          array->data[i] = 0;
+        }
+        array->data[index] = value;
+        array->length = index + 1;
+      }
+      return value;
+    }
+    // eg. int value = arr[1];
+    operator int() const {
+      if (index >= 0 && index < array->length) {
+        return array->data[index];
+      }
+      return value_error;
+    }
+  };
+
   int *data{nullptr};
   int length{0};
   int capacity{0};
@@ -24,6 +55,8 @@ public:
       data[i] = other.data[i];
     }
   }
+  Item operator[](int index) { return Item(this, index); }
+
   ~DArray() { delete[] data; }
 
   int size() const { return length; }
